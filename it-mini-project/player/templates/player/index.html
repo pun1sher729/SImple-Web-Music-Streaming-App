@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Streamer</title>
+  {% load static %}
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    /* Custom styles for the landing page */
+    body {
+      background: linear-gradient(to bottom right, #ff6b6b, #1e90ff);
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      background-color: #ff0080;
+    }
+
+    .navbar-brand, .navbar-text {
+      color: #fff;
+    }
+
+    .hero-section {
+      padding: 150px 0;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      margin-bottom: 50px;
+    }
+
+    .feature-card {
+      background: linear-gradient(to bottom right, #FFFDD0, #808080);
+      border: none;
+      color: #FFA500;
+    }
+
+    .feature-card img {
+      width: 100%;
+      height: 75px;
+      object-fit: cover;
+    }
+
+    .card-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .card-text {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .search-section {
+      padding: 50px 0;
+    }
+
+    .search-title {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .search-form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .player-section {
+      padding: 100px 0;
+    }
+
+    .player-title {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .play-button {
+      display: inline-block;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 15px 30px;
+      color: #ff5e1f;
+      background-color: #fff;
+      border: none;
+      border-radius: 30px;
+      margin-top: 20px;
+      text-decoration: none;
+    }
+
+    .play-button:hover {
+      background-color: #ff8c42;
+      color: #fff;
+    }
+
+    footer {
+      padding: 20px 0;
+      background-color: #333;
+    }
+
+    footer p {
+      margin: 0;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="/">Music Streamer</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              {% if login == 0 %}
+              <li class="nav-item">
+                <a class="nav-link" style="color:#fff;" href="{% url 'signup_view' %}">Sign Up</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#fff;" href="{% url 'login_view' %}">Login</a>
+              </li>
+               {% endif %}
+               {% if login == 1 %}
+                <li class="nav-item">
+                <a class="nav-link" style="color:black;" href=# >{{cur_email}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:black;" href="{% url 'logout' %}">Log out</a>
+              </li>
+                {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+  <section class="hero-section">
+    <div class="container">
+      <h1 class="hero-title">Welcome to Music Streamer</h1>
+      <p class="hero-subtitle">Stream your favorite music anytime, anywhere</p>
+    </div>
+  </section>
+
+  <section class="features-section text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <div class="card feature-card">
+
+            <div class="card-body">
+              <h5 class="card-title">Unlimited Music</h5>
+              <p class="card-text">Access millions of songs from various artists, albums, and genres. Discover new music and create your own playlists.</p>
+            </div>
+        </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+        <div class="card feature-card">
+
+        <div class="card-body">
+        <h5 class="card-title">High Quality Audio</h5>
+        <p class="card-text">Listen to your favorite songs in crystal-clear, high quality audio without any interruptions.</p>
+        </div>
+        </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+        <div class="card feature-card">
+
+        <div class="card-body">
+        <h5 class="card-title">Offline Listening</h5>
+        <p class="card-text">Download your favorite songs and listen to them offline, even without an internet connection.</p>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+          </section>
+          <section class="player-section text-center">
+            <div class="container">
+              <h2 class="player-title">Start Listening Now</h2>
+              <a href="{% url 'signup_view' %}" class="play-button">Play Now</a>
+            </div>
+          </section>
+          <footer class="text-center">
+            <div class="container">
+              <p>&copy; 2023 Music Streamer. All rights reserved.</p>
+            </div>
+          </footer>
+          <!-- Bootstrap JS -->
+          <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.4/dist/umd/popper.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+        </html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login - Music Streamer</title>
+    {% load static %}
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+        background: linear-gradient(to bottom right, #1e90ff, #ff6b6b);
+        height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="text-center mb-4">Login</h1>
+      <strong style="color:red;">{{op}}</strong>
+        <br /><br />
+    <form method="post">
+        {% csrf_token %}
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="passwd" name="passwd" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Login</button>
+    </form>
+    <p class="text-center mt-3">Don't have an account? <a href="signup.html">Sign Up</a></p>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

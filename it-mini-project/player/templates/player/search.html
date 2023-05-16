@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Search - Music Streamer</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+
+    body {
+        background: linear-gradient(to bottom right, #1e90ff, #ff6b6b);
+        height: 100vh;
+    }
+
+     .navbar {
+      background-color: #ff0080;
+    }
+
+    .navbar-brand, .navbar-text {
+      color: #fff;
+    }
+
+    .container#body {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+      margin-top: 100px;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      padding: 20px 0;
+      background-color: #333;
+    }
+
+    footer p {
+      margin: 0;
+      color: #fff;
+    }
+
+  </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="/">Music Streamer</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" style="color:black;" href=# >{{cur_email}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:black;" href="{% url 'logout' %}">Log out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+  <div class="container" id="body">
+    <h1 class="text-center mb-4">Search for a Song</h1>
+      <strong style="color:red;">{{op}}</strong>
+    <form action="search" method="post">
+        {% csrf_token %}
+      <div class="form-group">
+        <label for="songName">Song Name</label>
+        <input type="text" class="form-control" id="songName" name="songName" value="{{song_name}}" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" name="search" value="search">Search</button>
+    </form>
+    <br /><br />
+    <form action="select_playlist" method="post">
+        {% csrf_token %}
+        <div>
+            <table class="table table-hover table-fixed">
+                <tr>
+                    {% for header in headers %}
+                        <th>{{header}}</th>
+                    {% endfor %}
+                    <th></th>
+                </tr>
+                
+                    {% for song_id,song in search_output.items %}
+                <tr>
+                        <td>{{song.0}}</td>
+                        <td>{{song.1}}</td>
+                        <td><button type="submit" name="add" value="{{song_id}}">Add to Playlist</button></td>
+                </tr>
+                    {% endfor %}
+            </table>
+        </div>
+    </form>
+    <form action="select_playlist" method="post">{% csrf_token %}
+      <div id="body">
+          {% if show_playlists == 1 %}
+            <label for="playlist">Select Playlist: </label>
+            <select id="playlist" name="playlist">
+                {% for id, name in playlists.items %}
+                    <option value="{{id}}">{{name}}</option>
+                {% endfor %}
+            </select>
+          <br />
+          <button type="submit" name="add_to_playlist" value="{{song_id}}">Add to playlist</button>
+          {% endif %}
+      </div>
+    </form>
+  </div>
+    <!--footer class="text-center">
+    <div class="container">
+      <p>&copy; 2023 Music Streamer. All rights reserved.</p>
+    </div>
+  </footer-->
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

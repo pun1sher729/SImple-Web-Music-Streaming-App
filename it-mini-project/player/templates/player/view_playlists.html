@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Playlists - Music Streamer</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+        background: linear-gradient(to bottom right, #1e90ff, #ff6b6b);
+        height: 100vh;
+    }
+
+    .navbar {
+      background-color: #ff0080;
+    }
+
+    .navbar-brand, .navbar-text {
+      color: #fff;
+    }
+
+    .container#body {
+      background-color: black;
+      color: white;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+      margin-top: 100px;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      padding: 20px 0;
+      background-color: #333;
+    }
+
+    footer p {
+      margin: 0;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="/">Music Streamer</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" style="color:black;" href=# >{{cur_email}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:black;" href="{% url 'logout' %}">Log out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <div class="container" id="body">
+        {% if show_songs == 0 %}
+            <h2>Your PLaylists:</h2><br />
+        {% endif %}
+    <form action="view_playlist" method="post">{% csrf_token %}
+        {% for id,name in user_playlists.items %}
+            <button class="btn bg-transparent" style="color:white;" type="submit" name="playlist" value="{{id}}">{{name}}</button><br />
+        {% endfor %}
+        {% if len == 1%}
+        <strong>{{playlist_name.upper}}</strong>
+        {% endif %}
+        {% if len == 0%}
+        <strong><a class="nav-link" style="color:white;" href="{% url 'search_song' %}">Add songs to your playlist</a></strong>
+        {% endif %}
+    </form>
+    </div>
+
+    {% if show_songs == 1 and len == 1 %}
+    <div class="container" id="body">
+        <table class="table table-hover table-fixed" style="color:white;">
+            <tr>
+                <th>{{headers.0}}</th>
+                <th>{{headers.1}}</th>
+            </tr>
+            {% for id, val in songs.items %}
+            <tr>
+                <td>{{val.0}}</td>
+                <td>{{val.1}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a class="nav-link" style="color:red;" href="{% url 'search_song' %}">Add more songs</a>
+    </div>
+    {% endif %}
+    <footer class="text-center">
+    <div class="container">
+      <p>&copy; 2023 Music Streamer. All rights reserved.</p>
+    </div>
+  </footer>
+    
+</body>
+</html>
