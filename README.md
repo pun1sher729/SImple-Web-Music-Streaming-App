@@ -11,5 +11,5 @@ Features:
 - View songs in each playlist
 
 Admin logins:
-- username: admin
+- username: player_admin
 - password: password@123
