@@ -1,5 +1,5 @@
 # Simple-Web-Music-Streaming-App
-Internet Technologies Lab project (Doesn't actually play music)
+Internet Technologies Lab project made using django (Doesn't actually play music)
 
 Features:
 - Signup and login for Users
